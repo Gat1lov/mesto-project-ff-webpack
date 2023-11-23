@@ -24,7 +24,7 @@ export function openModal(modal) {
 }
 
 export function closeModal(modal) {
-    document.addEventListener('keydown', closeByEsc);
+    document.removeEventListener('keydown', closeByEsc);
     modal.classList.remove('popup_is-opened');
 }
 
