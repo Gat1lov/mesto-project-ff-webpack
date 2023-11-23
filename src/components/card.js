@@ -2,22 +2,20 @@ import { initialCards } from './cards'
 import { cardsContainer } from './constants'
 import { openModal, closeModal } from './modal'
 
+const popupImageCaption = document.querySelector('.popup__caption');
 const cardTemplate = document.querySelector('#card-template');
 
-export function openImagePopup(card) {
+export function openImagePopup(name, link) {
   const popupImage = document.querySelector('.popup_type_image');
-  const imageElement = card.querySelector('.card__image');
-  const placeName = card.querySelector('.card__title').textContent;
-  const imageUrl = imageElement.getAttribute('src');
   const popupImageElement = popupImage.querySelector('.popup__image');
-  const popupImageCaption = popupImage.querySelector('.popup__caption');
 
-  popupImageElement.src = imageUrl
-  popupImageElement.setAttribute('alt', placeName);
-  popupImageCaption.textContent = placeName;
+  popupImageElement.src = link;
+  popupImageElement.setAttribute('alt', name);
+  popupImageCaption.textContent = name;
 
   openModal(popupImage);
 }
+
 
 export function createCard(name, link, likeProc, deleteProc, openImagePopup) {
   const card = cardTemplate.content.querySelector('.card').cloneNode(true);
@@ -39,8 +37,8 @@ export function createCard(name, link, likeProc, deleteProc, openImagePopup) {
   });
 
   cardImage.addEventListener('click', function () {
-    openImagePopup(card)
-  })
+    openImagePopup(name, link);
+  });
 
   return card;
 };
